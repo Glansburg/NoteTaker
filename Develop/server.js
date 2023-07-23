@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const path = require("path");
 const fs = require("fs");
+const PORT = 3001;
 // const routes = require("./routes"); 
 // when it's ./routes, it looks for either routes.js or routes/index.js
 // const routes = require("./routes/index.js"); 
@@ -54,6 +55,6 @@ app.post("/api/notes", (req,res)=>{
     res.sendFile(path.join(__dirname, "./public/index.html"))
 })
 
-app.listen(3001, () => {
-    console.log("Running at port " + 3001);
+app.listen(PORT, () => {
+    console.log(`App listening at http://localhost:${PORT}`);
 })
