@@ -39,7 +39,7 @@ const saveNote = (note) =>
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(note),
+    body: JSON.stringify(note), // {a:1,b:2} => '{"a":1, "b":2}'
   });
 
 const deleteNote = (id) =>
@@ -116,9 +116,18 @@ const handleRenderSaveBtn = () => {
   }
 };
 
+/*
+fetch("/api/notes")
+.then(notes=>notes.json())
+.then(jsonNotes)=>{
+  // Render on webpage using jsonNotes array
+})
+
+*/
+
 // Render the list of note titles
 const renderNoteList = async (notes) => {
-  let jsonNotes = await notes.json();
+  let jsonNotes = await notes.json(); // parser converting json string into native type - aka array
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
