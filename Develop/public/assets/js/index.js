@@ -25,7 +25,8 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
-const getNotes = () =>
+//review the fetches
+const getNotes = () =>  //is this connecting with our other get requests from server.js?
   fetch('/api/notes', {
     method: 'GET',
     headers: {
