@@ -30,7 +30,7 @@ const getNotes = () =>  //is this connecting with our other get requests from se
   fetch('/api/notes', {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json', //where is content type comming from
     },
   });
 
@@ -38,7 +38,7 @@ const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json', 
     },
     body: JSON.stringify(note), // {a:1,b:2} => '{"a":1, "b":2}'
   });
