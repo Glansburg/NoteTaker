@@ -39,6 +39,14 @@ app.get("/api/notes", (req,res)=>{
     res.json(arrayOfNotes)
 })
 app.post("/api/notes", (req,res)=>{
+    let filePost = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8",
+    (err) => {
+        if (err) throw err;
+    })
+     const filePosted = JSON.parse.body.push(filePost)
+     console.log(filePosted);
+     res.json(filePosted)
+     
     // Read the notes into an array like before
     // Push `req.body` into the array
     /*
