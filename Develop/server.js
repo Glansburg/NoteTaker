@@ -10,7 +10,7 @@ const PORT = 3001;
 
 app.use(express.json())
 // fetch... body:{...}
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 // <form> <label for="name">Name:</label> 
 // <input type="text" id="name" name="customer.name">
 // <label for="phonenumber">Phone:</label> 
@@ -18,35 +18,40 @@ app.use(express.urlencoded({extended:false}));
 
 app.use(express.static(path.join(__dirname, "./public")))
 
-
-app.get("/", (req,res)=>{
+                                                    
+app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
 })
-app.get("/notes", (req,res)=>{
+app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/notes.html"))
     //res.json({players:[{name:"John", characterClass:"wizard"}]})
     // fetch... then... then... response.players in a for loop
 })
 
 ///api/note
-app.get("/api/notes", (req,res)=>{
-    let fileText = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8", (err)=>{
-        if(err) throw err;
+app.get("/api/notes", (req, res) => {
+    let fileText = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8", (err) => {
+        if (err) throw err;
     })
     let arrayOfNotes = JSON.parse(fileText)
 
     console.log(arrayOfNotes)
     res.json(arrayOfNotes)
 })
-app.post("/api/notes", (req,res)=>{
+app.post("/api/notes", (req, res) => {
     let filePost = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8",
-    (err) => {
-        if (err) throw err;
-    })
-     const filePosted = JSON.parse.body.push(filePost)
-     console.log(filePosted);
-     res.json(filePosted)
-     
+        (err) => {
+            if (err) throw err;
+        })
+    let filePostArray = JSON.parse(filePost);
+    filePostArray.push(req.body);
+    fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(filePostArray), "utf8",
+        (err) => {
+            if (err) throw err;
+        })
+
+    res.json({})
+
     // Read the notes into an array like before
     // Push `req.body` into the array
     /*
