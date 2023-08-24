@@ -26,11 +26,11 @@ const hide = (elem) => {
 let activeNote = {};
 
 //review the fetches
-const getNotes = () =>  //is this connecting with our other get requests from server.js?
+const getNotes = () =>  
   fetch('/api/notes', {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json', //where is content type comming from
+      'Content-Type': 'application/json', 
     },
   });
 
