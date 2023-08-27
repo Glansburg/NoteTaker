@@ -24,6 +24,7 @@ app.get("/notes", (req, res) => {
 })
 
 app.delete('/notes/:id', (req,res) => {
+    res.sendFile(path.join(__dirname, "./public/notes.html"))
     deleteNote(notes, req.params.id);
     res.json(note);
 })
