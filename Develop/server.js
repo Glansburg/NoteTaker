@@ -23,6 +23,11 @@ app.get("/notes", (req, res) => {
     // fetch... then... then... response.players in a for loop
 })
 
+app.delete('/notes/:id', (req,res) => {
+    deleteNote(notes, req.params.id);
+    res.json(note);
+})
+
 
 app.get("/api/notes", (req, res) => {
     let fileText = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8", (err) => {
