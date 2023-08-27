@@ -4,7 +4,7 @@ const app = express();
 const path = require("path");
 const fs = require("fs");
 const PORT = 3001;
-
+//const { deleteNote } = require('./public/assets/js')
 
 app.use(express.json())
 
@@ -18,16 +18,27 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
 })
 app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/notes.html"))
+    res.sendFile(path.join(__dirname, "./public/api/notes.html"))
     //res.json({players:[{name:"John", characterClass:"wizard"}]})
     // fetch... then... then... response.players in a for loop
 })
 
 app.delete('/notes/:id', (req,res) => {
-    res.sendFile(path.join(__dirname, "./public/notes.html"))
+    let readPosts = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8",
+    (err) => {
+        if (err) throw err;
+    })
+    let arrayofPosts = JSON.parse(readPosts)
     deleteNote(notes, req.params.id);
     res.json(note);
-})
+    //overwrite system
+    fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(arrayofPosts), "utf8",
+        (err) => {
+            if (err) throw err;
+        })
+
+    res.json({})
+});
 
 
 app.get("/api/notes", (req, res) => {
