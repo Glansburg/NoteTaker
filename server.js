@@ -22,23 +22,37 @@ app.get("/notes", (req, res) => {
     // fetch... then... then... response.players in a for loop
 })
 //deleting note id in notes endpoint, needs id to work
-app.delete('/notes/:id', (req,res) => {
-    let readPosts = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8",
-    (err) => {
-        if (err) throw err;
-    })
-    let arrayofPosts = JSON.parse(readPosts)
-    // for each
-    //deleteNote(notes, req.params.id);
-    res.json(note);
-    //overwrite system
-    fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(arrayofPosts), "utf8",
-        (err) => {
-            if (err) throw err;
-        })
+app.delete('/notes/:id', (req, res) => {
+    const idToDelete = req.params.id; // Get the ID to delete from the request parameters
 
-    res.json({})
+    let readPosts = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8", (err) => {
+        if (err) throw err;
+    });
+
+    let arrayofPosts = JSON.parse(readPosts);
+
+    let postDeleted = false; // To track whether the post was deleted
+
+    // Use a forEach loop to find and delete the post with the specified ID
+    arrayofPosts.forEach((post, index) => {
+        if (post.id === idToDelete) {
+            arrayofPosts.splice(index, 1); // Remove the post from the array
+            postDeleted = true;
+        }
+    });
+
+    if (postDeleted) {
+        // If the post with the specified ID was found and deleted
+        fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(arrayofPosts), "utf8", (err) => {
+            if (err) throw err;
+        });
+
+        res.json({ message: 'Note deleted successfully' });
+    } else {
+        res.status(404).json({ message: 'Note not found' });
+    }
 });
+
 
 // getting notes from database
 app.get("/api/notes", (req, res) => {
