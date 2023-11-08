@@ -7,7 +7,7 @@ let noteList;
 if (window.location.pathname === "/notes") {
   noteTitle = document.querySelector(".note-title");
   noteText = document.querySelector(".note-textarea");
-  saveNoteBtn = document.querySelector(".save-note"); //no save note in notes.html
+  saveNoteBtn = document.querySelector(".save-note"); 
   newNoteBtn = document.querySelector(".new-note");
   noteList = document.querySelectorAll(".list-container .list-group");
 }
@@ -40,7 +40,7 @@ const saveNote = (note) =>
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(note), // {a:1,b:2} => '{"a":1, "b":2}'
+    body: JSON.stringify(note), 
   });
 
 const deleteNote = (id) =>

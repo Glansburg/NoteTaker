@@ -22,7 +22,7 @@ app.get("/notes", (req, res) => {
     //res.json({players:[{name:"John", characterClass:"wizard"}]})
     // fetch... then... then... response.players in a for loop
 })
-//deleting note id in notes endpoint, needs id to work
+//deleting note id in notes endpoint
 app.delete('/api/notes/:id', (req, res) => {
     const idToDelete = req.params.id; // Get the ID to delete from the request parameters
 
@@ -34,7 +34,7 @@ app.delete('/api/notes/:id', (req, res) => {
 
     let postDeleted = false; // To track whether the post was deleted
 
-    // Use a forEach loop to find and delete the post with the specified ID
+    // Find and delete the post with the specified ID
     arrayofPosts.forEach((post, index) => {
         if (post.id === idToDelete) {
             arrayofPosts.splice(index, 1); // Remove the post from the array
