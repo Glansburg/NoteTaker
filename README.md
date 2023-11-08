@@ -11,7 +11,7 @@ Through this project I learned:
 * That time invested was time well spent and I learned more and feel more confident
   
 ## Being new to web development I came across some issues you may see obvious such as:
-* Taking a really long time looking up the logic of this code.
+* Taking a long time looking up the logic of this code.
  * Understanding what everything does.
 * how to launch the site with Heroku. My account got locked out
  ## Instalation
