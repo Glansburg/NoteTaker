@@ -23,7 +23,7 @@ app.get("/notes", (req, res) => {
     // fetch... then... then... response.players in a for loop
 })
 //deleting note id in notes endpoint, needs id to work
-app.delete('/notes/:id', (req, res) => {
+app.delete('/api/notes/:id', (req, res) => {
     const idToDelete = req.params.id; // Get the ID to delete from the request parameters
 
     let readPosts = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8", (err) => {
