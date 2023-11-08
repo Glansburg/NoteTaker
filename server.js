@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require("path");
 const fs = require("fs");
+const uuid = require('uuid');
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json())
@@ -65,31 +66,28 @@ app.get("/api/notes", (req, res) => {
     res.json(arrayOfNotes)
 })
 //posting notes to the api/notes endpoint
+
+
 app.post("/api/notes", (req, res) => {
-    let filePost = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8",
-        (err) => {
-            if (err) throw err;
-        })
+    let filePost = fs.readFileSync(path.join(__dirname, "./db/db.json"), "utf8", (err) => {
+        if (err) throw err;
+    });
     let filePostArray = JSON.parse(filePost);
-    // user writing note
-    filePostArray.push(req.body);
-    //overwritting db.json
-    fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(filePostArray), "utf8",
-        (err) => {
-            if (err) throw err;
-        })
 
-    res.json({})
-    
+    const newNote = req.body;
+    newNote.id = uuid.v4(); // Generate a unique ID for the new note
 
+    // Add the new note to the array
+    filePostArray.push(newNote);
 
-  
+    // Overwrite db.json with the updated array
+    fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(filePostArray), "utf8", (err) => {
+        if (err) throw err;
+    });
 
-    
-  
-    console.log(req.body)
-    res.sendFile(path.join(__dirname, "./public/index.html"))
-})
+    res.json(newNote); // Respond with the created note (including its ID)
+});
+
 
 app.listen(PORT, () => {
     console.log(`App listening at http://localhost:${PORT}`);
