@@ -18,7 +18,7 @@ Through this project I learned:
 N/A
 
 ## Usage
-To view this webpage copy and paste this link in a web browser:
+To view this webpage copy and paste this link in a web browser: https://note-taker-quotes-24a247755264.herokuapp.com/notes 
 <img width="1241" alt="joel11" src="https://github.com/Glansburg/NoteTaker/assets/117139285/07bb576a-b9f5-4111-9759-d4caf2553628">
 
 
